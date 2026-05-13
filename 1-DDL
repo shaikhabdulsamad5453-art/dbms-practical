@@ -1,0 +1,28 @@
+-- 1. Create Tables
+CREATE TABLE Customer (CustID INT PRIMARY KEY, Name VARCHAR(50), Cust_Address VARCHAR(100), Phone_no VARCHAR(15), Email_ID VARCHAR(50), Age INT);
+
+CREATE TABLE Branch (Branch_ID INT PRIMARY KEY, Branch_Name VARCHAR(50), Address VARCHAR(100));
+
+CREATE TABLE Account (Account_no INT PRIMARY KEY, Branch_ID INT, CustID INT, date_open DATE, Account_type VARCHAR(20), Balance DECIMAL(10,2), FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID), FOREIGN KEY (CustID) REFERENCES Customer(CustID));
+
+-- Insert Data
+INSERT INTO Customer VALUES (101,'Amit','Pune','9876543210','amit@gmail.com',30);
+
+INSERT INTO Branch VALUES (1,'Pune_Main','Shivaji Nagar');
+
+INSERT INTO Account VALUES (1001,1,101,'2017-03-15','Saving',50000);
+
+-- 3. Create Index
+CREATE INDEX idx_account_no ON Account(Account_no);
+
+-- 4. Create View
+CREATE VIEW Customer_Info AS SELECT * FROM Customer WHERE Age < 45;
+
+-- 5. Update View/Table
+UPDATE Account SET date_open='2017-04-16' WHERE Account_no=1001;
+
+-- 6. Create Sequence
+CREATE SEQUENCE Branch_seq START WITH 1 INCREMENT BY 1;
+
+-- 7. Create Synonym
+CREATE SYNONYM Branch_info FOR Branch;
